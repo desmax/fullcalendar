@@ -388,13 +388,13 @@ var View = fc.View = Class.extend({
 
 	// Binds DOM handlers to elements that reside outside the view container, such as the document
 	bindGlobalHandlers: function() {
-		$(document).on('mousedown', this.documentMousedownProxy);
+		$(document).on('vmousedown', this.documentMousedownProxy);
 	},
 
 
 	// Unbinds DOM handlers from elements that reside outside the view container
 	unbindGlobalHandlers: function() {
-		$(document).off('mousedown', this.documentMousedownProxy);
+		$(document).off('vmousedown', this.documentMousedownProxy);
 	},
 
 
