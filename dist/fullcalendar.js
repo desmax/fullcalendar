@@ -410,9 +410,9 @@ function getCssFloat(el, prop) {
 }
 
 
-// Returns a boolean whether this was a left mouse click and no ctrl key (which means right click on Mac)
+// Returns a boolean whether this was a left mouse click(or mobile tap) and no ctrl key (which means right click on Mac)
 function isPrimaryMouseButton(ev) {
-	return ev.which == 1 && !ev.ctrlKey;
+	return (ev.which == 1 || ev.which === 0) && !ev.ctrlKey;
 }
 
 
@@ -1665,7 +1665,7 @@ var Popover = Class.extend({
 		});
 
 		if (options.autoHide) {
-			$(document).on('mousedown', this.documentMousedownProxy = proxy(this, 'documentMousedown'));
+			$(document).on('vmousedown', this.documentMousedownProxy = proxy(this, 'documentMousedown'));
 		}
 	},
 
@@ -1688,7 +1688,7 @@ var Popover = Class.extend({
 			this.el = null;
 		}
 
-		$(document).off('mousedown', this.documentMousedownProxy);
+		$(document).off('vmousedown', this.documentMousedownProxy);
 	},
 
 
@@ -2002,8 +2002,8 @@ var DragListener = fc.DragListener = Class.extend({
 			}
 
 			$(document)
-				.on('mousemove', this.mousemoveProxy = proxy(this, 'mousemove'))
-				.on('mouseup', this.mouseupProxy = proxy(this, 'mouseup'))
+				.on('vmousemove', this.mousemoveProxy = proxy(this, 'vmousemove'))
+				.on('vmouseup', this.mouseupProxy = proxy(this, 'vmouseup'))
 				.on('selectstart', this.preventDefault); // prevents native selection in IE<=8
 
 			if (ev) {
@@ -2131,8 +2131,8 @@ var DragListener = fc.DragListener = Class.extend({
 			}
 
 			$(document)
-				.off('mousemove', this.mousemoveProxy)
-				.off('mouseup', this.mouseupProxy)
+				.off('vmousemove', this.mousemoveProxy)
+				.off('vmouseup', this.mouseupProxy)
 				.off('selectstart', this.preventDefault);
 
 			this.mousemoveProxy = null;
@@ -2556,7 +2556,7 @@ var MouseFollower = Class.extend({
 				this.updatePosition();
 			}
 
-			$(document).on('mousemove', this.mousemoveProxy = proxy(this, 'mousemove'));
+			$(document).on('vmousemove', this.mousemoveProxy = proxy(this, 'vmousemove'));
 		}
 	},
 
@@ -2581,7 +2581,7 @@ var MouseFollower = Class.extend({
 		if (this.isFollowing && !this.isAnimating) { // disallow more than one stop animation at a time
 			this.isFollowing = false;
 
-			$(document).off('mousemove', this.mousemoveProxy);
+			$(document).off('vmousemove', this.mousemoveProxy);
 
 			if (shouldRevert && revertDuration && !this.isHidden) { // do a revert animation?
 				this.isAnimating = true;
@@ -3082,7 +3082,7 @@ var Grid = fc.Grid = RowRenderer.extend({
 
 		// attach a handler to the grid's root element.
 		// jQuery will take care of unregistering them when removeElement gets called.
-		el.on('mousedown', function(ev) {
+		el.on('vmousedown', function(ev) {
 			if (
 				!$(ev.target).is('.fc-event-container *, .fc-more') && // not an an event element, or "more.." link
 				!$(ev.target).closest('.fc-popover').length // not on a popover (like the "more.." events one)
@@ -6967,13 +6967,13 @@ var View = fc.View = Class.extend({
 
 	// Binds DOM handlers to elements that reside outside the view container, such as the document
 	bindGlobalHandlers: function() {
-		$(document).on('mousedown', this.documentMousedownProxy);
+		$(document).on('vmousedown', this.documentMousedownProxy);
 	},
 
 
 	// Unbinds DOM handlers from elements that reside outside the view container
 	unbindGlobalHandlers: function() {
-		$(document).off('mousedown', this.documentMousedownProxy);
+		$(document).off('vmousedown', this.documentMousedownProxy);
 	},
 
 
