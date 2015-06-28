@@ -75,8 +75,8 @@ var DragListener = fc.DragListener = Class.extend({
 			}
 
 			$(document)
-				.on('vmousemove', this.mousemoveProxy = proxy(this, 'vmousemove'))
-				.on('vmouseup', this.mouseupProxy = proxy(this, 'vmouseup'))
+				.on('vmousemove', this.mousemoveProxy = proxy(this, 'mousemove'))
+				.on('vmouseup', this.mouseupProxy = proxy(this, 'mouseup'))
 				.on('selectstart', this.preventDefault); // prevents native selection in IE<=8
 
 			if (ev) {
@@ -204,8 +204,8 @@ var DragListener = fc.DragListener = Class.extend({
 			}
 
 			$(document)
-				.off('vmousemove', this.mousemoveProxy)
-				.off('vmouseup', this.mouseupProxy)
+				.off('mousemove', this.mousemoveProxy)
+				.off('mouseup', this.mouseupProxy)
 				.off('selectstart', this.preventDefault);
 
 			this.mousemoveProxy = null;

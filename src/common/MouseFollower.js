@@ -49,7 +49,7 @@ var MouseFollower = Class.extend({
 				this.updatePosition();
 			}
 
-			$(document).on('vmousemove', this.mousemoveProxy = proxy(this, 'vmousemove'));
+			$(document).on('vmousemove', this.mousemoveProxy = proxy(this, 'mousemove'));
 		}
 	},
 
@@ -74,7 +74,7 @@ var MouseFollower = Class.extend({
 		if (this.isFollowing && !this.isAnimating) { // disallow more than one stop animation at a time
 			this.isFollowing = false;
 
-			$(document).off('vmousemove', this.mousemoveProxy);
+			$(document).off('mousemove', this.mousemoveProxy);
 
 			if (shouldRevert && revertDuration && !this.isHidden) { // do a revert animation?
 				this.isAnimating = true;

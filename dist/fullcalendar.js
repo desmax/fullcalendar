@@ -2002,8 +2002,8 @@ var DragListener = fc.DragListener = Class.extend({
 			}
 
 			$(document)
-				.on('vmousemove', this.mousemoveProxy = proxy(this, 'vmousemove'))
-				.on('vmouseup', this.mouseupProxy = proxy(this, 'vmouseup'))
+				.on('vmousemove', this.mousemoveProxy = proxy(this, 'mousemove'))
+				.on('vmouseup', this.mouseupProxy = proxy(this, 'mouseup'))
 				.on('selectstart', this.preventDefault); // prevents native selection in IE<=8
 
 			if (ev) {
@@ -2131,8 +2131,8 @@ var DragListener = fc.DragListener = Class.extend({
 			}
 
 			$(document)
-				.off('vmousemove', this.mousemoveProxy)
-				.off('vmouseup', this.mouseupProxy)
+				.off('mousemove', this.mousemoveProxy)
+				.off('mouseup', this.mouseupProxy)
 				.off('selectstart', this.preventDefault);
 
 			this.mousemoveProxy = null;
@@ -2556,7 +2556,7 @@ var MouseFollower = Class.extend({
 				this.updatePosition();
 			}
 
-			$(document).on('vmousemove', this.mousemoveProxy = proxy(this, 'vmousemove'));
+			$(document).on('vmousemove', this.mousemoveProxy = proxy(this, 'mousemove'));
 		}
 	},
 
@@ -2581,7 +2581,7 @@ var MouseFollower = Class.extend({
 		if (this.isFollowing && !this.isAnimating) { // disallow more than one stop animation at a time
 			this.isFollowing = false;
 
-			$(document).off('vmousemove', this.mousemoveProxy);
+			$(document).off('mousemove', this.mousemoveProxy);
 
 			if (shouldRevert && revertDuration && !this.isHidden) { // do a revert animation?
 				this.isAnimating = true;
