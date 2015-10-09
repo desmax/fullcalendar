@@ -2344,8 +2344,8 @@ var DragListener = fc.DragListener = Class.extend({
 			}
 
 			$(document)
-				.off('mousemove', this.mousemoveProxy)
-				.off('mouseup', this.mouseupProxy)
+				.off('vmousemove', this.mousemoveProxy)
+				.off('vmouseup', this.mouseupProxy)
 				.off('selectstart', this.preventDefault);
 
 			this.mousemoveProxy = null;
@@ -2794,7 +2794,7 @@ var MouseFollower = Class.extend({
 		if (this.isFollowing && !this.isAnimating) { // disallow more than one stop animation at a time
 			this.isFollowing = false;
 
-			$(document).off('mousemove', this.mousemoveProxy);
+			$(document).off('vmousemove', this.mousemoveProxy);
 
 			if (shouldRevert && revertDuration && !this.isHidden) { // do a revert animation?
 				this.isAnimating = true;

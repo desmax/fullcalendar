@@ -74,7 +74,7 @@ var MouseFollower = Class.extend({
 		if (this.isFollowing && !this.isAnimating) { // disallow more than one stop animation at a time
 			this.isFollowing = false;
 
-			$(document).off('mousemove', this.mousemoveProxy);
+			$(document).off('vmousemove', this.mousemoveProxy);
 
 			if (shouldRevert && revertDuration && !this.isHidden) { // do a revert animation?
 				this.isAnimating = true;

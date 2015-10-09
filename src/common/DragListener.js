@@ -204,8 +204,8 @@ var DragListener = fc.DragListener = Class.extend({
 			}
 
 			$(document)
-				.off('mousemove', this.mousemoveProxy)
-				.off('mouseup', this.mouseupProxy)
+				.off('vmousemove', this.mousemoveProxy)
+				.off('vmouseup', this.mouseupProxy)
 				.off('selectstart', this.preventDefault);
 
 			this.mousemoveProxy = null;
